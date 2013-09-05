@@ -16,7 +16,7 @@
  * Input:    string to count
  * Example:  {count input=$array_of_files_to_combine output=$path_to_output_file age=$seconds_to_try_recombine_file}
  *
- * @author   Tkatchev Philippe <zoonman at gmail dot com>
+ * @author   Tkatchev Philipp <zoonman at gmail dot com>
  * @version 1.0
  * @param array
  * @param string
