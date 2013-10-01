@@ -1,12 +1,16 @@
 smarty-plugins
 ==============
 
-My smarty plugins
+My smarty plugins.
+More details available here 
+http://www.zoonman.com/projects/smarty-plugins/
 
 
 combine
 =======
 
+Combine plugin allows concatenating several js or css files into one. 
+It can be useful for big projects with a lot of several small CSS and JS files.
 Usage example for Smarty 3
 
     <script type="text/javascript" 
