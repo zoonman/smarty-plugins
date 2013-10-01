@@ -16,7 +16,7 @@
  * Input:    string to count
  * Example:  {count input=$array_of_files_to_combine output=$path_to_output_file age=$seconds_to_try_recombine_file}
  *
- * @author   Tkatchev Philipp <zoonman at gmail dot com>
+ * @author   Tkatchev Philippe <zoonman at gmail dot com>
  * @version 1.0
  * @param array
  * @param string
@@ -27,23 +27,6 @@
 function smarty_function_combine($params,&$smarty)
 {
 
-	/**
-	 * Get extension for given filename
-	 *
-	 * @param string $filename
-	 * @return string
-	 */
-	if (!function_exists('sfc_get_file_ext')) {
-		function sfc_get_file_ext($filename) {
-			$rm=explode(".", $filename);
-			if(is_array($rm)) {
-				if (isset($rm[count($rm)-1]))	{
-					return $rm[count($rm)-1];
-				}
-			}
-			return '';
-		}
-	}
 	/**
 	 * Print filename
 	 *
@@ -97,7 +80,7 @@ function smarty_function_combine($params,&$smarty)
 	}
 	if (isset($params['input'])) {
 		if(is_array($params['input']) && count($params['input']) > 0) {
-			$ext = sfc_get_file_ext($params['input'][0]);
+			$ext = pathinfo($params['input'][0], PATHINFO_EXTENSION);
 			if(in_array($ext,array('js','css'))) {
 				$params['type'] = $ext;
 				if (!isset($params['output'])) $params['output'] = dirname($params['input'][0]).'/combined.'.$ext;
