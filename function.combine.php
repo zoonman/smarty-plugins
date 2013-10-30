@@ -54,7 +54,10 @@ function smarty_function_combine($params,&$smarty)
 				$lastest_mtime = max($lastest_mtime, $mtime);
 				$filelist[] = array('name' => $item, 'time' => $mtime);
 			}
-			$last_cmtime = file_get_contents($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name']);
+			$last_cmtime = 0;
+			if (file_exists($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name'])) {
+				$last_cmtime = file_get_contents($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name']);
+			}
 			if ($lastest_mtime > $last_cmtime) {
 				$glob_mask = preg_replace("/\.(js|css)$/i","_*.$1", $params['output']);
 				$files_to_cleanup = glob($_SERVER['DOCUMENT_ROOT'].$glob_mask);
