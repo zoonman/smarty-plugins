@@ -34,7 +34,11 @@ function smarty_function_combine($params,&$smarty)
 	 */
 	if (!function_exists('sfc_print_out')) {
 		function sfc_print_out($params) {
-			$last_mtime = file_get_contents($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name']);
+			$last_mtime = 0;
+			if (file_exists($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name'])) {
+				$last_mtime = file_get_contents($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name']);
+				echo $last_mtime;
+			}
 			$output_filename = preg_replace("/\.(js|css)$/i", date("_YmdHis.",$last_mtime)."$1", $params['output']);
 			echo $output_filename;
 		}	
@@ -50,9 +54,15 @@ function smarty_function_combine($params,&$smarty)
 			$filelist = array();
 			$lastest_mtime = 0;
 			foreach ($params['input'] as $item) {
-				$mtime = filemtime($_SERVER['DOCUMENT_ROOT'].$item);
-				$lastest_mtime = max($lastest_mtime, $mtime);
-				$filelist[] = array('name' => $item, 'time' => $mtime);
+				
+				if (file_exists($_SERVER['DOCUMENT_ROOT'].$item)) {
+					$mtime = filemtime($_SERVER['DOCUMENT_ROOT'].$item);
+					$lastest_mtime = max($lastest_mtime, $mtime);
+					$filelist[] = array('name' => $item, 'time' => $mtime);
+				}
+				else {
+					trigger_error('File '.$_SERVER['DOCUMENT_ROOT'].$item.' does not exists!', E_USER_WARNING);
+				}
 			}
 			$last_cmtime = 0;
 			if (file_exists($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name'])) {
@@ -104,17 +114,17 @@ function smarty_function_combine($params,&$smarty)
 				}
 			}
 			else {
-				$smarty->_trigger_fatal_error("input file must have js or css extension");
+				trigger_error("input file must have js or css extension", E_USER_NOTICE);
 				return;
 			}
 		}
 		else {
-			$smarty->_trigger_fatal_error("input must be array and have one item at least");
+			trigger_error("input must be array and have one item at least", E_USER_NOTICE);
 			return;
 		}
 	}
 	else {
-		$smarty->_trigger_fatal_error("input cannot be empty");
+		trigger_error("input cannot be empty",E_USER_NOTICE);
 		return;
 	}
 }
