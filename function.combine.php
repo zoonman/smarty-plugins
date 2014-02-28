@@ -37,7 +37,6 @@ function smarty_function_combine($params,&$smarty)
 			$last_mtime = 0;
 			if (file_exists($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name'])) {
 				$last_mtime = file_get_contents($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name']);
-				echo $last_mtime;
 			}
 			$output_filename = preg_replace("/\.(js|css)$/i", date("_YmdHis.",$last_mtime)."$1", $params['output']);
 			echo $output_filename;
