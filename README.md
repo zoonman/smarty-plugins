@@ -1,4 +1,4 @@
-smarty-plugins
+Smarty plugins
 ==============
 
 My smarty plugins.
@@ -6,7 +6,7 @@ More details available here
 http://www.zoonman.com/projects/smarty-plugins/
 
 
-combine
+Combine
 =======
 
 Combine plugin allows concatenating several js or css files into one. 
@@ -18,6 +18,6 @@ Usage example for Smarty 3
     charset="utf-8"></script>
 
 
-You should be sure, that js folder is writable to web-server daemon.
+You should be sure that js folder is writable to web-server daemon (your php script).
 
 
