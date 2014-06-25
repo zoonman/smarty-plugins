@@ -5,7 +5,6 @@ My smarty plugins.
 More details available here 
 http://www.zoonman.com/projects/smarty-plugins/
 
-
 Combine
 =======
 
